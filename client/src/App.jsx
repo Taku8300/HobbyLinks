@@ -1,15 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Listview from "./components/Listview";
+import Searchbar from "./components/Searchbar";
 
 function App() {
+  const [count, setCount] = useState(0);
   return (
     <div>
-      <h1 className="text-5xl font-bold underline text-red-600">
-        Hello world!
-      </h1>
-      <h2>
-        Push to develop
-        ２回目です
-      </h2>
+      <Searchbar></Searchbar>
+      <Listview></Listview>
     </div>
   );
 }
