@@ -5,19 +5,15 @@ import Map from "./components/Map";
 
 function App() {
   return (
-    <div className="">
-      <div>
-        <div className="bg-gray-200 min-h-screen">
-          <div className="max-w-7xl mx-auto grid grid-cols-12  gap-5">
-            <div className="col-span-2 bg-red-200">1</div>
-            <div className="col-span-8 ">
-              <Searchbar></Searchbar>
-              <Listview></Listview>
-            </div>
-            <div className="col-span-2">
-              <Map></Map>
-            </div>
-          </div>
+    <div className="bg-gray-200 min-h-screen">
+      <div className="max-w-7xl mx-auto grid grid-cols-12  gap-5 ">
+        <div className="col-span-2 bg-red-200">1</div>
+        <div className="col-span-8 ">
+          <Searchbar></Searchbar>
+          <Listview></Listview>
+        </div>
+        <div className="col-span-2">
+          <Map></Map>
         </div>
       </div>
     </div>
