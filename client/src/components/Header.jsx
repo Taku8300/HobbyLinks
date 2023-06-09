@@ -1,9 +1,14 @@
 import React from "react";
 
-function Header() {
+function Header({ setMainsection }) {
+  const handleClick = () => {
+    setMainsection("list");
+  };
   return (
     <div className="flex justify-start gap-5 align-top mx-auto sticky top-0 z-20 max-w-screen-2xl  py-2 bg-neutral-200 shadow-md">
-      <div className="font-bold text-2xl">HobbyLinks</div>
+      <div className="font-bold text-2xl cursor-pointer" onClick={handleClick}>
+        HobbyLinks
+      </div>
       <div>
         <input
           type="text"

@@ -2,7 +2,7 @@ import React from "react";
 
 function Filter() {
   return (
-    <div className="flex justify-start  mx-auto my-2 px-2 gap-5">
+    <div className="flex justify-center  mx-auto my-2 px-2 gap-5">
       <select
         name="Day"
         className="py-2 px-4  border border-gray-300  rounded-md focus:outline-none"

@@ -4,23 +4,35 @@ import GroupItem from "./GroupItem";
 import Events from "../data/Events";
 import Group from "../data/Group";
 
-function Listview({ showList }) {
+function Listview({ showList, setMainsection }) {
   return (
     <div className=" max-w-5xl mx-auto overflow-y-auto">
-      {showList === "event" ? eventlist() : grouplist()}
+      {showList === "event"
+        ? eventlist(setMainsection)
+        : grouplist(setMainsection)}
     </div>
   );
 }
 
-function eventlist() {
+function eventlist(setMainsection) {
   return Events.map((e) => (
-    <EventItem imgUrl={e.imgUrl} desc={e.desc} title={e.title} />
+    <EventItem
+      imgUrl={e.imgUrl}
+      desc={e.desc}
+      title={e.title}
+      setMainsection={setMainsection}
+    />
   ));
 }
 
-function grouplist() {
+function grouplist(setMainsection) {
   return Group.map((e) => (
-    <GroupItem imgUrl={e.imgUrl} desc={e.desc} title={e.title} />
+    <GroupItem
+      imgUrl={e.imgUrl}
+      desc={e.desc}
+      title={e.title}
+      setMainsection={setMainsection}
+    />
   ));
 }
 
