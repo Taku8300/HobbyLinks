@@ -3,6 +3,7 @@ import Listview from "./components/Listview";
 import Searchbar from "./components/Searchbar";
 import Map from "./components/Map";
 import Sidebar from "./components/Sidebar";
+import Header from "./components/Header";
 
 function App() {
   const [showList, setShowList] = useState("group");
@@ -12,16 +13,17 @@ function App() {
   }, [showList]);
 
   return (
-    <div className='bg-neutral-200 min-h-screen '>
-      <div className='max-w-7xl mx-auto grid grid-cols-12  '>
-        <div className='col-span-2'>
+    <div className="bg-neutral-200 min-h-screen ">
+      <Header></Header>
+      <div className="max-w-7xl mx-auto grid grid-cols-12  ">
+        <div className="col-span-2 sticky top-0">
           <Sidebar></Sidebar>
         </div>
-        <div className='col-span-8 '>
+        <div className="col-span-8 ">
           <Searchbar setShowList={setShowList} showList={showList}></Searchbar>
           <Listview showList={showList}></Listview>
         </div>
-        <div className='col-span-2'>
+        <div className="col-span-2 px-4">
           <Map></Map>
         </div>
       </div>
