@@ -11,16 +11,12 @@ function MainPage() {
     <div className=" min-h-screen">
       <Header />
       <div className="max-w-7xl mx-auto grid grid-cols-12">
-        <div className="col-span-2 sticky top-0">
-          <Sidebar />
-        </div>
+        <div className="col-span-2 sticky top-0"></div>
         <div className="col-span-8">
           <Searchbar setShowList={setShowList} showList={showList} />
           <Listview showList={showList} />
         </div>
-        <div className="col-span-2 px-4">
-          <Map />
-        </div>
+        <div className="col-span-2 px-4"></div>
       </div>
     </div>
   );
