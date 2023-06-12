@@ -1,14 +1,19 @@
-import { useEffect, useState } from "react";
-import Listview from "./components/Listview";
-import Searchbar from "./components/Searchbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MainPage from "./pages/Mainpage";
+import GroupPage from "./pages/GroupPage";
+import EventPage from "./pages/EventPage";
 
 function App() {
-  const [count, setCount] = useState(0);
   return (
-    <div>
-      <Searchbar></Searchbar>
-      <Listview></Listview>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        {/* <Route path="/group" element={<GroupPage />} /> */}
+        <Route path="/group/:groupId" element={<GroupPage />} />
+        {/* <Route path="/event" element={<EventPage />} /> */}
+        <Route path="/event/:eventId" element={<EventPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
