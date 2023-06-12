@@ -20,12 +20,10 @@ class User extends Model
     protected $table = 'user';
 
     protected $fillable = [
-        'user_id',
-        'user_name',
-        'birthday',
-        'gender',
-        'email',
-        'password',
+        'USER_ID',
+        'USER_NAME',
+        'EMAIL',
+        'PASSWORD',
     ];
 
     /**
