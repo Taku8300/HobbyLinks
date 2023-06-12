@@ -12,7 +12,7 @@ class Users extends Model
     use SoftDeletes;
 
 
-   /**
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -46,4 +46,4 @@ class Users extends Model
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
+}
