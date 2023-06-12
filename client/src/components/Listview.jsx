@@ -14,13 +14,13 @@ function Listview({ showList }) {
 
 function eventlist() {
   return Events.map((e) => (
-    <EventItem imgUrl={e.imgUrl} desc={e.desc} title={e.title} />
+    <EventItem imgUrl={e.imgUrl} desc={e.desc} title={e.title} eventId={e.id} />
   ));
 }
 
 function grouplist() {
   return Group.map((e) => (
-    <GroupItem imgUrl={e.imgUrl} desc={e.desc} title={e.title} />
+    <GroupItem imgUrl={e.imgUrl} desc={e.desc} title={e.title} groupId={e.id} />
   ));
 }
 
