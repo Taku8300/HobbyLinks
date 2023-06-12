@@ -18,9 +18,9 @@ class Event extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'event_name',
-        'address',
-        'type',
+        'EVENT_name',
+        'ADDRESS',
+        'TYPE',
     ];
 
     /**
@@ -40,6 +40,4 @@ class Event extends Authenticatable
     protected $casts = [
         'address' => 'hashed',
     ];
-
-
 }
