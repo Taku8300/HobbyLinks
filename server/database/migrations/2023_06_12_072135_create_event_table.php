@@ -15,10 +15,14 @@ return new class extends Migration
             $table->char('event_id', 7)->primary();
             $table->string('event_name', 250)->nullable(false);
             $table->string('address', 100)->nullable(false);
-            $table->foreign('user_id')->references('user_id')->on('user');
-            // $table->char('created_by'); # 外部キー
+            // $table->foreign('user_id')->references('user_id')->on('user');
+            $table->char('created_by'); # 外部キー
             // $table->foreign('created_by')->references('char')->on('user'); # 外部キー制約をつける
             $table->string('type', 10)->nullable(false);
+            $table->char('group_id', 7);
+            $table->foreign('group_id')->references('group_id')->on('group'); # 外部キー制約をつける
+
+
         });
     }
 
