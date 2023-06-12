@@ -7,7 +7,6 @@ import Header from "../components/Header";
 
 function MainPage() {
   const [showList, setShowList] = useState("group");
-
   return (
     <div className=" min-h-screen">
       <Header />
