@@ -1,14 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Header({ setMainsection }) {
-  const handleClick = () => {
-    setMainsection("list");
-  };
   return (
-    <div className="flex justify-start gap-5 align-top mx-auto sticky top-0 z-20 max-w-screen-2xl  py-2 bg-neutral-200 shadow-md">
-      <div className="font-bold text-2xl cursor-pointer" onClick={handleClick}>
-        HobbyLinks
-      </div>
+    <Link
+      to={`/`}
+      className="flex justify-start gap-5 align-top mx-auto sticky top-0 z-20 max-w-screen-2xl  py-2 bg-white shadow-md"
+    >
+      <div className="font-bold text-2xl cursor-pointer">HobbyLinks</div>
       <div>
         <input
           type="text"
@@ -25,7 +24,7 @@ function Header({ setMainsection }) {
         </button>
       </div>
       <div></div>
-    </div>
+    </Link>
   );
 }
 
