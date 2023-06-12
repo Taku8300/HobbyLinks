@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('photo', function (Blueprint $table) {
-            $table->string('photo_path', 350);
             $table->char('photo_id', 7)->primary();
-            $table->foreign('photo_category')->nullable(false);
-            $table->foreign('group_id')->nullable(true);
-            $table->foreign('event_id')->nullable(true);
+            $table->string('photo_path', 350);
+            $table->string('photo_category', 20)->nullable(false);
+            $table->char('group_id', 7)->nullable(true);
+            $table->char('event_id', 7)->nullable(true);
+            $table->foreign('group_id')->references('group_id')->on('group');
+            $table->foreign('event_id')->references('event_id')->on('event');
         });
     }
 
