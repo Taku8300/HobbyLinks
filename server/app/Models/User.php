@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Users extends Model
+class User extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -17,6 +17,8 @@ class Users extends Model
      *
      * @var array<int, string>
      */
+    protected $table = 'user';
+
     protected $fillable = [
         'user_id',
         'user_name',

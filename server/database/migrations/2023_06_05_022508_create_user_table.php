@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('GENDER', 3)->nullable();
             $table->string('EMAIL', 256)->unique();
             $table->string('PASSWORD', 64);
+            $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 
