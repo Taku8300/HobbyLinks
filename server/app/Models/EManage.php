@@ -11,5 +11,5 @@ class EManage extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'e_manage';
+    protected $table = 'e_manages';
 }

@@ -17,10 +17,10 @@ class Group extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'GROUP_NAME',
-        'CATEGORY_ID',
-        'DESCRIPTION',
-        'PEOPLE_LIMIT',
+        'group_name',
+        'category_id',
+        'description',
+        'people_limit',
     ];
 
     /**

@@ -17,13 +17,13 @@ class User extends Model
      *
      * @var array<int, string>
      */
-    protected $table = 'user';
+    protected $table = 'users';
 
     protected $fillable = [
-        'USER_ID',
-        'USER_NAME',
-        'EMAIL',
-        'PASSWORD',
+        'user_id',
+        'user_name',
+        'email',
+        'password',
     ];
 
     /**
@@ -32,7 +32,6 @@ class User extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        'birthday',
         'password',
         'remember_token',
     ];
@@ -43,7 +42,7 @@ class User extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+
         'password' => 'hashed',
     ];
 }
