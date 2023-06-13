@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('event', function (Blueprint $table) {
-            $table->char('EVENT_ID', 7)->primary();
-            $table->string('EVENT_NAME', 250);
-            $table->string('PREFECTURE', 5);
-            $table->string('ADDRESS', 100);
-            $table->char('CREATED_BY', 5);
-            $table->string('TYPE');
+        Schema::create('events', function (Blueprint $table) {
+            $table->increments('event_id');
+            $table->string('event_name', 250);
+            $table->string('prefecture', 5);
+            $table->string('address', 100);
+            $table->char('created_by', 5); //userID参照
+            $table->string('type');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('event');
+        Schema::dropIfExists('events');
     }
 };

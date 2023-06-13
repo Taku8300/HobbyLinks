@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('group', function (Blueprint $table) {
-            $table->char('GROUP_ID', 7)->primary();
-            $table->string('GROUP_NAME', 128);
-            $table->char('CREATED_BY', 5);
-            $table->integer('PEOPLE_LIMIT');
-            $table->integer('CATEGORY_ID');
-            $table->foreign('CATEGORY_ID')->references('CATEGORY_ID')->on('category');
+        Schema::create('groups', function (Blueprint $table) {
+            $table->increments('group_id');
+            $table->string('group_name', 128);
+            $table->char('created_by', 5);
+            $table->integer('people_limit');
+            $table->integer('category_id')->unsigned();
+            $table->timestamps();
+            $table->softDeletes();
+            $table->foreign('category_id')->references('category_id')->on('categories');
         });
     }
 
@@ -26,6 +28,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('group');
+        Schema::table('groups', function (Blueprint $table) {
+            $table->dropForeign(['category_id']);
+        });
+
+
+        Schema::dropIfExists('groups');
     }
 };

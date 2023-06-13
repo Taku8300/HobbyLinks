@@ -11,11 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('e_manage', function (Blueprint $table) {
-            $table->char('EVENT_ID', 7)->primary();
-            $table->char('USER_ID', 5);
-            $table->foreign('EVENT_ID')->references('EVENT_ID')->on('event');
-            $table->foreign('USER_ID')->references('USER_ID')->on('user');
+        Schema::create('e_manages', function (Blueprint $table) {
+            $table->integer('event_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->timestamps();
+            $table->softDeletes();
+
+            $table->primary(['event_id', 'user_id']);
+
+            $table->foreign('event_id')->references('event_id')->on('events');
+            $table->foreign('user_id')->references('user_id')->on('users');
         });
     }
 
@@ -24,6 +29,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('e_manage');
+        Schema::table('e_manages', function (Blueprint $table) {
+            $table->dropForeign(['event_id']);
+            $table->dropForeign(['user_id']);
+        });
+
+        Schema::dropIfExists('e_manages');
     }
 };

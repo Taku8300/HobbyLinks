@@ -11,12 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('g_manage', function (Blueprint $table) {
-            $table->char('GROUP_ID', 7)->primary();
-            $table->char('USER_ID', 5);
-            $table->timestamp('ENT_DATE')->useCurrent();
-            $table->foreign('GROUP_ID')->references('GROUP_ID')->on('group');
-            $table->foreign('USER_ID')->references('USER_ID')->on('user');
+        Schema::create('g_manages', function (Blueprint $table) {
+            $table->integer('group_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->timestamp('ent_date')->useCurrent(); //???
+            $table->timestamps();
+            $table->softDeletes();
+
+            $table->primary(['group_id', 'user_id']);
+
+            $table->foreign('group_id')->references('group_id')->on('groups');
+            $table->foreign('user_id')->references('user_id')->on('users');
         });
     }
 
@@ -25,6 +30,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('g_manage');
+        Schema::table('g_manages', function (Blueprint $table) {
+            $table->dropForeign(['group_id']);
+            $table->dropForeign(['user_id']);
+        });
+
+        Schema::dropIfExists('g_manages');
     }
 };

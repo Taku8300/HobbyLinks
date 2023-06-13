@@ -11,5 +11,5 @@ class Photo extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'photo';
+    protected $table = 'photos';
 }

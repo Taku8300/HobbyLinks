@@ -11,5 +11,5 @@ class GManage extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'g_manage';
+    protected $table = 'g_manages';
 }
