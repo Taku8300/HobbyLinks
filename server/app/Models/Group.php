@@ -19,7 +19,7 @@ class Group extends Authenticatable
     protected $fillable = [
         'group_name',
         'category_id',
-        'description',
+        'created_by',
         'people_limit',
     ];
 
