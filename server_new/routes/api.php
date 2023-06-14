@@ -23,6 +23,8 @@ Route::get('/users/{id}', [UserController::class, 'show']);
 Route::post('/users', [UserController::class, 'store']);
 Route::put('/users/{id}', [UserController::class, 'update']);
 Route::delete('/users/{id}', [UserController::class, 'destroy']);
+
+//Auth Routes
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 
@@ -32,7 +34,6 @@ Route::get('/groups/{id}', [GroupController::class, 'show']);
 Route::post('/groups', [GroupController::class, 'store']);
 Route::put('/groups/{id}', [GroupController::class, 'update']);
 Route::delete('/groups/{id}', [GroupController::class, 'destroy']);
-
 
 //Events Routes
 Route::get('/events', [EventController::class, 'index']);

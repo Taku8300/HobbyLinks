@@ -19,6 +19,7 @@ class Group extends Model
         'created_by',
         'people_limit',
         'category_id',
-        'desc'
+        'desc',
+        'header_Url'
     ];
 }

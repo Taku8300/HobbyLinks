@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('people_limit')->nullable();
             $table->integer('category_id')->unsigned();
             $table->string('desc');
-            $table->string('header_Url')->nullable();
+            $table->string('header_Url');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('category_id')->references('category_id')->on('categories');
