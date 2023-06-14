@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class Event extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'categories';
-    protected $primaryKey = 'category_id';
+    protected $table = 'events';
+    protected $primaryKey = 'events';
+    protected $fillable = ['event_name', 'prefecture', 'address', 'created_by', 'type', 'header_Url'];
 }
