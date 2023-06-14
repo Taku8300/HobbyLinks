@@ -46,11 +46,21 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
         $user = User::find($id);
-        $user->update($request->all());
-        return response()->json($user);
+
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+        $user->fill($request->all()); // Use fill() instead of update() to assign the values
+
+        $user->save();
+
+
+
+        return response()->json($user, 200);
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -60,7 +70,7 @@ class UserController extends Controller
         //
         $user = User::find($id);
         $user->delete();
-        return response()->json(null, 204);
+        return response()->json('user deleted', 204);
     }
 
     public function login(Request $request)
