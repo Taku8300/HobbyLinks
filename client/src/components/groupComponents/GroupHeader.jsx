@@ -2,7 +2,7 @@ import React from "react";
 
 function GroupHeader({ imgUrl, title, groupId }) {
   return (
-    <div className="flex justify-center mx-auto w-full bg-red-50">
+    <div className="flex justify-center mx-auto w-full ">
       <div>
         <img src={imgUrl} alt="" className="max-w-xl" />
       </div>
