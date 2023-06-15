@@ -2,12 +2,17 @@ import React from "react";
 
 function GroupHeader({ imgUrl, title, groupId }) {
   return (
-    <div className="flex ">
+    <div className="flex justify-center mx-auto w-full bg-red-50">
       <div>
-        <img src={imgUrl} alt="" className="w-48" />
+        <img src={imgUrl} alt="" className="max-w-xl" />
       </div>
-      <div>
-        <h1>{title}</h1>
+      <div className="pl-6 border max-w-sm w-full">
+        <h1 className="text-3xl font-bold ">
+          {title} Dashing Whippets Running Team
+        </h1>
+        <p>Osaka,Jp</p>
+        <p>Members 20</p>
+        <p>Created by : User_01</p>
       </div>
     </div>
   );

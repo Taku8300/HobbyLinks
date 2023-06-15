@@ -5,7 +5,7 @@ function GroupItem({ imgUrl, title, desc, groupId }) {
   return (
     <Link
       to={`/group/${groupId}`}
-      className="flex flex-col rounded-lg bg-white border-2  shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] md:flex-row border-b-2 mb-1 cursor-pointer"
+      className="flex flex-col rounded-lg bg-white shadow-md  md:flex-row border-b-2 mb-1 cursor-pointer"
     >
       <img src={imgUrl} alt="" className="w-56 rounded-md" />
       <div className="flex flex-col justify-start pt-2 px-4">

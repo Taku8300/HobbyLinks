@@ -20,19 +20,23 @@ function GroupPage() {
   };
 
   return (
-    <div className=" min-h-screen">
-      {/* btnsection */}
+    <>
       <Header />
-      <GroupHeader
-        groupId={groupId}
-        imgUrl={groupDetails.imgUrl}
-        title={groupDetails.title}
-      />
-      <About desc={groupDetails.desc} />
+      <div className="min-h-screen bg-slate-50">
+        <div className="flex flex-col mb-4 mt-2 mx-auto max-w-4xl bg-white ">
+          {/* btnsection */}
+          <GroupHeader
+            groupId={groupId}
+            imgUrl={groupDetails.imgUrl}
+            title={groupDetails.title}
+          />
+          <About desc={groupDetails.desc} />
 
-      <EventsSection events={groupDetails.events} />
-      <Photo />
-    </div>
+          <EventsSection events={groupDetails.events} />
+          <Photo />
+        </div>
+      </div>
+    </>
   );
 }
 
