@@ -12,4 +12,5 @@ class GManage extends Model
     use SoftDeletes;
 
     protected $table = 'g_manages';
+    protected $fillable = ['group_id', 'user_id'];
 }
