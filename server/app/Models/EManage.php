@@ -12,4 +12,5 @@ class EManage extends Model
     use SoftDeletes;
 
     protected $table = 'e_manages';
+    protected $fillable = ['event_id', 'user_id'];
 }
