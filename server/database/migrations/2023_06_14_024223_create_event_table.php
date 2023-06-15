@@ -18,10 +18,11 @@ return new class extends Migration
             $table->string('address', 100);
             $table->char('created_by', 5); //userID参照
             $table->string('type');
-            $table->string('header_Url');
+            $table->string('header_url');
             $table->string('desc');
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('created_byUser')->references('user_id')->on('users');
         });
     }
 
@@ -30,6 +31,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('groups', function (Blueprint $table) {
+            $table->dropForeign(['created_byUser']);
+        });
+
+
         Schema::dropIfExists('events');
     }
 };

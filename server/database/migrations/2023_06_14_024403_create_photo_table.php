@@ -16,6 +16,11 @@ return new class extends Migration
             $table->string('photo_path', 350);
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
+            $table->integer('group_id')->unsigned();
+            $table->integer('event_id')->unsigned();
+
+            $table->foreign('group_id')->references('group_id')->on('groups');
+            $table->foreign('event_id')->references('event_id')->on('events');
         });
     }
 
@@ -24,6 +29,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('g_manages', function (Blueprint $table) {
+            $table->dropForeign(['group_id']);
+            $table->dropForeign(['event_id']);
+        });
+
         Schema::dropIfExists('photos');
     }
 };
