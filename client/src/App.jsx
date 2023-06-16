@@ -8,9 +8,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        {/* <Route path="/group" element={<GroupPage />} /> */}
         <Route path="/group/:groupId" element={<GroupPage />} />
-        {/* <Route path="/event" element={<EventPage />} /> */}
         <Route path="/event/:eventId" element={<EventPage />} />
       </Routes>
     </BrowserRouter>
