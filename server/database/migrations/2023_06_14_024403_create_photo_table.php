@@ -29,7 +29,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('g_manages', function (Blueprint $table) {
+        Schema::table('photos', function (Blueprint $table) {
             $table->dropForeign(['group_id']);
             $table->dropForeign(['event_id']);
         });

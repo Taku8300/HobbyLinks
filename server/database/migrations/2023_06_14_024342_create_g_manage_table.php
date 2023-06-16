@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('g_manages', function (Blueprint $table) {
             $table->integer('group_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->timestamp('ent_date')->useCurrent(); //???
+            $table->timestamp('ent_date')->useCurrent();
             $table->timestamps();
             $table->softDeletes();
 

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->increments('group_id');
             $table->string('group_name', 128);
-            $table->char('created_byUser', 5); //userID
+            $table->integer('created_byUser')->unsigned(); //userID
             $table->integer('category_id')->unsigned();
             // description=説明 の略
             $table->integer('people_limit')->nullable();
