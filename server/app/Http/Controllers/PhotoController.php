@@ -21,20 +21,22 @@ class PhotoController extends Controller
             // アップロードされたファイルの元の名前を取得
             $filename = $file->getClientOriginalName();
 
+            $disk = 'local';
+
             // ファイルを指定の場所に保存
-            $file->storeAs('public/images', $filename);
+            $path = $file->storeAs('public/images', $filename, $disk);
 
             // Imageモデルのインスタンスを作成
             $image = new Photo;
 
             // ファイル名を設定
-            $image->filename = $filename;
+            $image->photo_path =  $path;
 
             // データベースに保存
             $image->save();
 
             // 成功レスポンスを返す
-            return response()->json(['message' => 'Image uploaded successfully.']);
+            return response()->json(['message' => 'Image uploaded successfully.'], 201);
         }
 
         // エラーレスポンスを返す
