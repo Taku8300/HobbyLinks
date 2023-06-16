@@ -37,15 +37,17 @@ class PhotoController extends Controller
             $publicPath = Storage::url($path);
 
 
-        // ファイル名を生成する
-        $fileName = time() . '_' . $file->getClientOriginalName();
+            // ファイル名を生成する
+            $fileName = time() . '_' . $file->getClientOriginalName();
+
+            // Imageモデルのインスタンスを作成
+            $image = new Photo;
 
             // ファイル名を設定
             $image->photo_path =  $path;
 
-
-        // シンボリックリンクを作成する
-        $publicPath = Storage::url($path);
+            // データベースに保存
+            $image->save();
 
             // 成功レスポンスを返す
             return response()->json(['image' => $image], 201);
