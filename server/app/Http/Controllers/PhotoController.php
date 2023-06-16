@@ -13,31 +13,45 @@ class PhotoController extends Controller
 {
     public function upload(Request $request)
     {
-        // バリデーションルールを設定する
-        $rules = [
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // 画像ファイルの制約を指定する
-        ];
+        // ファイルのバリデーションや保存先の設定など必要な処理を追加
+        if ($request->hasFile('image')) {
 
-        // バリデーションを実行する
-        $request->validate($rules);
+            $rules = [
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // 画像ファイルの制約を指定する
+            ];
 
-        // アップロードされたファイルを取得する
-        $file = $request->file('image');
+            // アップロードされたファイルを取得
+            $file = $request->file('image');
+
+            $request->validate($rules);
+
+            // ファイル名を生成する
+            $fileName = time() . '_' . $file->getClientOriginalName();
+
+            $disk = 'local';
+
+            // ファイルを指定の場所に保存
+            $path = $file->storeAs('public/images', $fileName, $disk);
+
+            // シンボリックリンクを作成する
+            $publicPath = Storage::url($path);
+
 
         // ファイル名を生成する
         $fileName = time() . '_' . $file->getClientOriginalName();
 
-        // ファイルをストレージに保存する
-        $path = $file->storeAs('public/images', $fileName);
+            // ファイル名を設定
+            $image->photo_path =  $path;
+
 
         // シンボリックリンクを作成する
         $publicPath = Storage::url($path);
 
-        // データベースに画像情報を保存する
-        $image = new Photo();
-        $image->path = $publicPath;
-        $image->save();
+            // 成功レスポンスを返す
+            return response()->json(['image' => $image], 201);
+        }
 
-        return response()->json(['url' => $publicPath]);
+        // エラーレスポンスを返す
+        return response()->json(['message' => 'No image found.'], 400);
     }
 }

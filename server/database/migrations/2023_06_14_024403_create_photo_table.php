@@ -12,16 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('photos', function (Blueprint $table) {
-            $table->integer('photo_id', true);
+            $table->increments('id');
             $table->string('photo_path', 350);
             $table->timestamps();
             // データを消すではなく消す日にちを付ける)関数を使うためのカラム
             $table->timestamp('deleted_at')->nullable();
-            $table->integer('group_id')->unsigned();
-            $table->integer('event_id')->unsigned();
+            //$table->integer('group_id')->unsigned();
+            //$table->integer('user_id')->unsigned();
 
-            $table->foreign('group_id')->references('group_id')->on('groups');
-            $table->foreign('event_id')->references('event_id')->on('events');
+            // $table->foreign('group_id')->references('group_id')->on('groups');
+            // $table->foreign('user_id')->references('user_id')->on('users');
         });
     }
 
@@ -30,10 +30,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('photos', function (Blueprint $table) {
-            $table->dropForeign(['group_id']);
-            $table->dropForeign(['event_id']);
-        });
+        // Schema::table('photos', function (Blueprint $table) {
+        //     $table->dropForeign(['group_id']);
+        //     $table->dropForeign(['user_id']);
+        // });
 
         Schema::dropIfExists('photos');
     }

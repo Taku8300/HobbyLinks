@@ -16,13 +16,13 @@ return new class extends Migration
             $table->string('event_name', 250);
             $table->string('prefecture', 5);
             $table->string('address', 100);
-            $table->integer('created_byUser')->unsigned(); //userID参照
+            $table->integer('created_by')->unsigned(); //userID参照
             $table->string('type');
-            $table->string('header_url');
+            //$table->string('header_url');
             $table->string('desc');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('created_byUser')->references('user_id')->on('users');
+            $table->foreign('created_by')->references('user_id')->on('users');
         });
     }
 
@@ -32,7 +32,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('groups', function (Blueprint $table) {
-            $table->dropForeign(['created_byUser']);
+            $table->dropForeign(['created_by']);
         });
 
 
