@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('event_name', 250);
             $table->string('prefecture', 5);
             $table->string('address', 100);
-            $table->char('created_by', 5); //userID参照
+            $table->char('created_by')->unsigned(); //userID参照
             $table->string('type');
             $table->string('header_url');
             $table->string('desc');
