@@ -15,16 +15,25 @@ class PhotoController extends Controller
         // ファイルのバリデーションや保存先の設定など必要な処理を追加
         if ($request->hasFile('image')) {
 
+            $rules = [
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // 画像ファイルの制約を指定する
+            ];
+
             // アップロードされたファイルを取得
             $file = $request->file('image');
 
-            // アップロードされたファイルの元の名前を取得
-            $filename = $file->getClientOriginalName();
+            $request->validate($rules);
+
+            // ファイル名を生成する
+            $fileName = time() . '_' . $file->getClientOriginalName();
 
             $disk = 'local';
 
             // ファイルを指定の場所に保存
-            $path = $file->storeAs('public/images', $filename, $disk);
+            $path = $file->storeAs('public/images', $fileName, $disk);
+
+            // シンボリックリンクを作成する
+            $publicPath = Storage::url($path);
 
             // Imageモデルのインスタンスを作成
             $image = new Photo;
@@ -36,7 +45,7 @@ class PhotoController extends Controller
             $image->save();
 
             // 成功レスポンスを返す
-            return response()->json(['message' => 'Image uploaded successfully.'], 201);
+            return response()->json(['image' => $image], 201);
         }
 
         // エラーレスポンスを返す
