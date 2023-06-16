@@ -8,9 +8,10 @@ use App\Models\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+
 class PhotoController extends Controller
 {
-    public function store(Request $request)
+    public function upload(Request $request)
     {
         // ファイルのバリデーションや保存先の設定など必要な処理を追加
         if ($request->hasFile('image')) {
@@ -35,14 +36,16 @@ class PhotoController extends Controller
             // シンボリックリンクを作成する
             $publicPath = Storage::url($path);
 
-            // Imageモデルのインスタンスを作成
-            $image = new Photo;
+
+        // ファイル名を生成する
+        $fileName = time() . '_' . $file->getClientOriginalName();
 
             // ファイル名を設定
             $image->photo_path =  $path;
 
-            // データベースに保存
-            $image->save();
+
+        // シンボリックリンクを作成する
+        $publicPath = Storage::url($path);
 
             // 成功レスポンスを返す
             return response()->json(['image' => $image], 201);
@@ -51,15 +54,4 @@ class PhotoController extends Controller
         // エラーレスポンスを返す
         return response()->json(['message' => 'No image found.'], 400);
     }
-
-    public function show($id)
-    {
-        // 指定されたIDの画像情報を取得
-        $image = Photo::findOrFail($id);
-
-        // 画像情報をJSON形式で返す
-        return response()->json($image);
-    }
-
-    // 他の必要なメソッド（一覧表示、削除など）も追加可能
 }

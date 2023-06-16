@@ -15,6 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('photo_path', 350);
             $table->timestamps();
+            // データを消すではなく消す日にちを付ける)関数を使うためのカラム
             $table->timestamp('deleted_at')->nullable();
             //$table->integer('group_id')->unsigned();
             //$table->integer('user_id')->unsigned();
