@@ -22,8 +22,6 @@ return new class extends Migration
             $table->string('profile_Pic')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->string('desc');
-            $table->string('header_Url');
         });
     }
 
