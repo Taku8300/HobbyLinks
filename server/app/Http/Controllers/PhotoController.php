@@ -8,47 +8,36 @@ use App\Models\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+
 class PhotoController extends Controller
 {
-    public function store(Request $request)
+    public function upload(Request $request)
     {
-        // ファイルのバリデーションや保存先の設定など必要な処理を追加
-        if ($request->hasFile('image')) {
+        // バリデーションルールを設定する
+        $rules = [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // 画像ファイルの制約を指定する
+        ];
 
-            // アップロードされたファイルを取得
-            $file = $request->file('image');
+        // バリデーションを実行する
+        $request->validate($rules);
 
-            // アップロードされたファイルの元の名前を取得
-            $filename = $file->getClientOriginalName();
+        // アップロードされたファイルを取得する
+        $file = $request->file('image');
 
-            // ファイルを指定の場所に保存
-            $file->storeAs('public/images', $filename);
+        // ファイル名を生成する
+        $fileName = time() . '_' . $file->getClientOriginalName();
 
-            // Imageモデルのインスタンスを作成
-            $image = new Photo;
+        // ファイルをストレージに保存する
+        $path = $file->storeAs('public/images', $fileName);
 
-            // ファイル名を設定
-            $image->filename = $filename;
+        // シンボリックリンクを作成する
+        $publicPath = Storage::url($path);
 
-            // データベースに保存
-            $image->save();
+        // データベースに画像情報を保存する
+        $image = new Photo();
+        $image->path = $publicPath;
+        $image->save();
 
-            // 成功レスポンスを返す
-            return response()->json(['message' => 'Image uploaded successfully.']);
-        }
-
-        // エラーレスポンスを返す
-        return response()->json(['message' => 'No image found.'], 400);
+        return response()->json(['url' => $publicPath]);
     }
-
-    public function show($id)
-    {
-        // 指定されたIDの画像情報を取得
-        $image = Photo::findOrFail($id);
-
-        // 画像情報をJSON形式で返す
-        return response()->json($image);
-    }
-
-    // 他の必要なメソッド（一覧表示、削除など）も追加可能
 }
