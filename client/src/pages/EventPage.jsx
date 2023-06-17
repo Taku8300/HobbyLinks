@@ -16,12 +16,17 @@ function EventPage() {
     groupId: eventId,
     Group: Group[eventId],
   };
+
   return (
-    <div className=" min-h-screen">
+    <>
       <Header />
-      <EventHeader imgUrl={eventDetails.imgUrl} title={eventDetails.title} />
-      <EventDesc desc={eventDetails.desc} />
-    </div>
+      <div className=' min-h-screen bg-slate-50'>
+        <div className='flex flex-col mb-2 mx-auto max-w-5xl bg-white px-10 py-5 shadow-lg min-h-screen'>
+          <EventHeader imgUrl={eventDetails.imgUrl} title={eventDetails.title} />
+          <EventDesc desc={eventDetails.desc} />
+        </div>
+      </div>
+    </>
   );
 }
 
