@@ -1,8 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import { faUserGroup } from "@fortawesome/free-solid-svg-icons";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot, faUserGroup, faUser } from "@fortawesome/free-solid-svg-icons";
 
 function GroupHeader({ imgUrl, title, groupId }) {
   return (

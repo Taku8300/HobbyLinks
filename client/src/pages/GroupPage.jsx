@@ -23,7 +23,7 @@ function GroupPage() {
     <>
       <Header />
       <div className='min-h-screen bg-slate-50'>
-        <div className='flex flex-col mb-2 mx-auto max-w-5xl bg-white px-5 py-5 shadow-lg'>
+        <div className='flex flex-col mb-2 mx-auto max-w-5xl bg-white px-5 py-5 shadow-lg min-h-screen'>
           {/* btnsection */}
           <GroupHeader groupId={groupId} imgUrl={groupDetails.imgUrl} title={groupDetails.title} />
           <About desc={groupDetails.desc} />

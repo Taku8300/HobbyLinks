@@ -4,12 +4,12 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 export default function EventHeader({ imgUrl, title }) {
   return (
-    <div>
+    <div className='mx-auto'>
       <div className='mt-2'>
         <h1 className='text-3xl font-medium'>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed dolorum
         </h1>
-        <div className='flex gap-2 my-5'>
+        <div className='flex gap-2 my-4'>
           <FontAwesomeIcon icon={faUser} size='xl' li />
           <h2 className=''>Created by: User_01</h2>
         </div>
