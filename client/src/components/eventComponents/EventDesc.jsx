@@ -5,7 +5,7 @@ import { faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 function EventDesc({ desc }) {
   return (
-    <div className='mx-auto px-5 mt-10'>
+    <div className='mx-auto mt-10'>
       <div className='flex mb-2 align-middle gap-2'>
         <FontAwesomeIcon icon={faClock} size='xl' />
         <h1 className=' text-xl'>{new Date().toISOString()}</h1>
