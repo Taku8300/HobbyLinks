@@ -43,4 +43,4 @@ Route::post('/events', [EventController::class, 'store']);
 Route::put('/events/{id}', [EventController::class, 'update']);
 Route::delete('/events/{id}', [EventController::class, 'destroy']);
 
-Route::post('/photos', [PhotoController::class, 'store']);
+Route::post('/photos', [PhotoController::class, 'upload']);
