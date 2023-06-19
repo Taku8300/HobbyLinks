@@ -3,6 +3,7 @@ import MainPage from "./pages/Mainpage";
 import GroupPage from "./pages/GroupPage";
 import EventPage from "./pages/EventPage";
 
+
 function App() {
   return (
     <BrowserRouter>
