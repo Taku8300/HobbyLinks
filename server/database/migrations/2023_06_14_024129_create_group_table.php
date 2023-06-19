@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('created_by')->unsigned(); //userID
             $table->integer('category_id')->unsigned();
             $table->integer('people_limit')->nullable();
-            //$table->string('header_url');
+            $table->string('header_path', 350)->default(""); //画像
             $table->string('desc'); // description=説明 の略
             $table->timestamps();
             $table->softDeletes();

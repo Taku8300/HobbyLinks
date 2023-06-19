@@ -44,7 +44,7 @@ class PhotoController extends Controller
             $image = new Photo;
 
             // ファイル名を設定
-            $image->photo_path =  $path;
+            $image->photo_path =  $publicPath;
 
             // データベースに保存
             $image->save();
