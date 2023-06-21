@@ -1,10 +1,18 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 //import { Fragment, useState } from "react";
 import Modal from "./Modal";
 import axios from "axios";
 
 function Header() {
+  const http = axios.create({
+    baseURL: "http://localhost:8000",
+    headers: {
+      "X-Requested-with": "XMLHttpRequest",
+    },
+    withCredentials: true,
+  });
+
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (e) => {
@@ -16,42 +24,22 @@ function Header() {
   //handle Login
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [accessToken, setAccessToken] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    const csrf = await http.get("/sanctum/csrf-cookie");
+    console.log("csrf :", csrf);
     try {
-      const response = await axios.post("http://localhost:8000/api/login", {
+      const login = await http.post("/api/login", {
         email,
         password,
       });
-      const resAccessToken = response.data.access_token;
+      console.log("login", login);
 
-      // Store the access token in local storage or state
-      // for future API requests or authentication checks
-
-      setAccessToken(resAccessToken);
-      console.log("access_token", accessToken);
-      getUser(accessToken);
+      const user = await http.get("/api/user");
+      console.log("user", user);
     } catch (error) {
       console.error("Login failed:", error);
-    }
-  };
-
-  // get current user
-  const getUser = async (accessToken) => {
-    try {
-      const response = await axios.get("http://localhost:8000/api/user", {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-
-      const user = response.data;
-      console.log("User:", user);
-      // Do something with the user data
-    } catch (error) {
-      console.error("Failed to get user:", error);
     }
   };
 
