@@ -299,7 +299,7 @@ function Header() {
                 htmlFor="email"
                 className="block mb-2 text-sm font-medium text-grey-900"
               >
-                Your Email
+                Email
               </label>
               <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
                 <svg
@@ -331,7 +331,7 @@ function Header() {
                 htmlFor="password"
                 className="block mb-2 text-sm font-medium text-grey-900"
               >
-                Your Password
+                Password
               </label>
               <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
                 <svg
