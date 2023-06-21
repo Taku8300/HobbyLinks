@@ -34,12 +34,21 @@ function Header() {
         email,
         password,
       });
-      console.log("login", login);
 
       const user = await http.get("/api/user");
       console.log("user", user);
+      handleLogout();
     } catch (error) {
       console.error("Login failed:", error);
+    }
+  };
+
+  const handleLogout = async (e) => {
+    try {
+      const logout = await http.post("/api/logout");
+      console.log("logout", logout);
+    } catch (error) {
+      console.error("Logout failed:", error);
     }
   };
 

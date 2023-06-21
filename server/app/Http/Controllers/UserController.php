@@ -86,13 +86,15 @@ class UserController extends Controller
             ]);
         }
 
+
         return $request->user();
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::guard('web')->logout();
-
-        return response()->json(['message' => 'Logged out successfully'], 200);
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return response()->noContent();
     }
 }
