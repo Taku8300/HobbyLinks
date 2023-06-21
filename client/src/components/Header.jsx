@@ -31,6 +31,7 @@ function Header() {
       // for future API requests or authentication checks
 
       setAccessToken(resAccessToken);
+      console.log("access_token", accessToken);
       getUser(accessToken);
     } catch (error) {
       console.error("Login failed:", error);
