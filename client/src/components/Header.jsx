@@ -13,11 +13,14 @@ function Header() {
     withCredentials: true,
   });
 
+  //handle search
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
+
+  //show login form || register form
   const [showModal1, setShowModal1] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
 
@@ -62,11 +65,18 @@ function Header() {
     }
   };
 
+  //handle register
+  const [name, setName] = useState("");
+  const [birthday, setBirthday] = useState("");
+  const [gender, setGender] = useState("");
+  const [registerMail, setRegisterMail] = useState("");
+  const [image, setImage] = useState("");
+
   return (
     <Fragment>
       <div className="flex justify-between gap-5 align-top mx-auto sticky top-0 z-20 max-w-[2560px] px-10 py-2 bg-white shadow-md">
         <div className="flex gap-5">
-          <Link to={`/`} className="font-bold text-2xl cursor-pointer">
+          <Link to={`/`} className="font-bold text-2xl cursor-pointer ">
             HobbyLinks
           </Link>
           <div>
@@ -197,7 +207,7 @@ function Header() {
             </div>
             <div>
               <a href="#" className="text-sm text-blue-700 hover:underline">
-                Lost Password?
+                Forgot Password?
               </a>
             </div>
             <br></br>
@@ -214,8 +224,8 @@ function Header() {
       </Modal>
       <Modal isVisible={showModal2} onClose={() => setShowModal2(false)}>
         <div className="py-6 px-6 lg:px-8 text-left">
-          <h3 className="text-gray-800 font-bold text-2xl mb-1">Sign up</h3>
-          <br></br>
+          <h3 className="text-gray-800 font-bold text-xl mb-4">Sign up</h3>
+
           <form className="spacy-y-6" action="#">
             <div>
               <label
@@ -224,7 +234,7 @@ function Header() {
               >
                 Name
               </label>
-              <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
+              <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5 text-gray-400"
@@ -254,7 +264,7 @@ function Header() {
               >
                 Birthday
               </label>
-              <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
+              <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-2">
                 <svg
                   className="h-5 w-5 text-gray-500"
                   width="24"
@@ -290,7 +300,7 @@ function Header() {
               >
                 Gender
               </label>
-              <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
+              <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-2">
                 <svg
                   className="h-5 w-5 text-gray-500"
                   width="24"
@@ -321,12 +331,44 @@ function Header() {
             </div>
             <div>
               <label
+                for="header_path"
+                className="block mb-2 text-sm font-medium text-grey-900 "
+              >
+                Photo
+              </label>
+
+              <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-2 ">
+                <svg
+                  class="h-5 w-5 text-gray-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+
+                <input
+                  type="file"
+                  name="header_path"
+                  id="header_path"
+                  className="boder border-gray-300 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
+                  required
+                />
+              </div>
+            </div>
+            <div>
+              <label
                 htmlFor="email"
                 className="block mb-2 text-sm font-medium text-grey-900"
               >
                 Email
               </label>
-              <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
+              <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5 text-gray-400"
@@ -358,7 +400,7 @@ function Header() {
               >
                 Password
               </label>
-              <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
+              <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5 text-gray-400"
