@@ -66,7 +66,8 @@ function GroupPage() {
               </button>
               <button
                 type=""
-                className="w-[130px] border hover:border-purple-500 border-b-4 font-medium rounded-lg text-lg px-5 py-2.5 text-center m-2"
+                className="w-[130px] border hover:border-purple-500 border-b-4 font-medium rounded-lg text-lg px-5 py-2.5 
+                text-center m-2"
               >
                 Events
               </button>
@@ -80,13 +81,13 @@ function GroupPage() {
                 type=""
                 className="w-[130px] border hover:border-purple-500 border-b-4 font-medium rounded-lg text-lg px-5 py-2.5 text-center m-2"
               >
-                Disscustion
+                Discussion
               </button>
             </div>
             <div>
               <button
                 type=""
-                className="w-30 text-white bg-purple-500 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center m-2 ml-12"
+                className="w-30 text-white bg-purple-500 hover:bg-purple-800 hover:border-purple-600 border-purple-400 border-b-4   rounded-lg text-xl font-bold px-5 py-2.5 text-center m-2 ml-12"
               >
                 Join This Group
               </button>

@@ -102,18 +102,34 @@ function Header() {
 
         <div>
           {user != null ? (
-            <div className="flex ">
-              <p className="text-gray-700 font-bold mr-2 text-lg text-center pt-2">
-                Welcome,{user.data.user_name}
-              </p>
+            <>
+              <div className="flex gap-1">
+                <Link
+                  to="/createGroup"
+                  className="border hover:border-b-purple-500 border-b-4 font-medium rounded-lg px-4 py-2 text-center"
+                >
+                  Create Group
+                </Link>
 
-              <button
-                className="bg-purple-500 text-white py-2 px-4 rounded-md hover:bg-purple-600 mr-2 font-bold"
-                onClick={handleLogout}
-              >
-                Logout
-              </button>
-            </div>
+                <Link
+                  to="/createEvent"
+                  className="border hover:border-b-purple-500 border-b-4 font-medium rounded-lg px-4 py-2 text-center"
+                >
+                  Create Event
+                </Link>
+                <p className="text-gray-700 font-bold mr-2  text-center pt-2">
+                  Welcome,{user.data.user_name}
+                </p>
+
+                <button
+                  className=" border hover:border-purple-500  border-b-4 font-medium rounded-lg  px-4 py-2 
+                  text-center "
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </div>
+            </>
           ) : (
             <>
               <button
