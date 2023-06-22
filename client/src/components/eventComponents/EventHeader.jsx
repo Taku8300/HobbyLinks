@@ -8,7 +8,7 @@ export default function EventHeader({ imgUrl, title }) {
       <div className="mt-2">
         <h1 className="text-3xl font-medium">{title}</h1>
         <div className="flex gap-2 my-4">
-          <FontAwesomeIcon icon={faUser} size="xl" li />
+          <FontAwesomeIcon icon={faUser} size="xl" />
           <h2 className="">Created by: User_01</h2>
         </div>
       </div>
