@@ -49,8 +49,50 @@ function GroupPage() {
             imgUrl={groupDetails.imgUrl}
             title={groupDetails.title}
           />
-          <About desc={groupDetails.desc} />
 
+          <div className="flex">
+            <div>
+              <button
+                type=""
+                className="w-[130px] border hover:border-purple-500 border-b-4 font-medium rounded-lg text-lg px-5 py-2.5 text-center m-2 ml-5"
+              >
+                About
+              </button>
+              <button
+                type=""
+                className="w-[130px] border hover:border-purple-500 border-b-4 font-medium rounded-lg text-lg px-5 py-2.5 text-center m-2"
+              >
+                Members
+              </button>
+              <button
+                type=""
+                className="w-[130px] border hover:border-purple-500 border-b-4 font-medium rounded-lg text-lg px-5 py-2.5 text-center m-2"
+              >
+                Events
+              </button>
+              <button
+                type=""
+                className="w-[130px] border hover:border-purple-500 border-b-4 font-medium rounded-lg text-lg px-5 py-2.5 text-center m-2"
+              >
+                Picture
+              </button>
+              <button
+                type=""
+                className="w-[130px] border hover:border-purple-500 border-b-4 font-medium rounded-lg text-lg px-5 py-2.5 text-center m-2"
+              >
+                Disscustion
+              </button>
+            </div>
+            <div>
+              <button
+                type=""
+                className="w-30 text-white bg-purple-500 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center m-2 ml-12"
+              >
+                Join This Group
+              </button>
+            </div>
+          </div>
+          <About desc={groupDetails.desc} />
           <EventsSection events={groupDetails.events} />
           <Photo />
         </div>
