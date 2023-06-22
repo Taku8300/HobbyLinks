@@ -55,6 +55,7 @@ function Header() {
     }
   };
 
+  //handle logout
   const handleLogout = async (e) => {
     try {
       const logout = await http.post("/api/logout");
@@ -70,7 +71,17 @@ function Header() {
   const [birthday, setBirthday] = useState("");
   const [gender, setGender] = useState("");
   const [registerMail, setRegisterMail] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
+
+  const handleRegister = async (e) => {
+    const register = await http.post("/api/users", {
+      name,
+      birthday,
+      gender,
+      registerMail,
+      image,
+    });
+  };
 
   return (
     <Fragment>
@@ -122,7 +133,7 @@ function Header() {
                 </p>
 
                 <button
-                  className=" border hover:border-purple-500  border-b-4 font-medium rounded-lg  px-4 py-2 
+                  className=" border hover:border-purple-500  border-b-4 border-r-4 font-medium rounded-lg  px-4 py-2 
                   text-center "
                   onClick={handleLogout}
                 >
