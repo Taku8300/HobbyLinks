@@ -17,9 +17,11 @@ return new class extends Migration
             $table->string('prefecture', 5);
             $table->string('address', 100);
             $table->integer('created_by')->unsigned(); //userID参照
+            //$table->integer('group_id')->unsigned(); //groupID参照
             $table->string('type');
-            //$table->string('header_url');
+            $table->string('header_path', 350)->default(""); //画像
             $table->string('desc');
+            $table->date('date');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('created_by')->references('user_id')->on('users');

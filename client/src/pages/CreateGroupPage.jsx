@@ -1,11 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function CreateGroupPage() {
+  const http = axios.create({
+    baseURL: "http://localhost:8000",
+    headers: {
+      "X-Requested-with": "XMLHttpRequest",
+    },
+    withCredentials: true,
+  });
+  //get user from localstorage
+  const [user, setUser] = useState(
+    localStorage.hasOwnProperty("currentUser") === true
+      ? JSON.parse(localStorage.getItem("currentUser"))
+      : null
+  );
+
+  const [group_name, setGroup_name] = useState("");
+  const [desc, setDesc] = useState("");
+  const [category, setCategory] = useState(0);
+  const [peopleLimit, setPeopleLimit] = useState(0);
+  const [file, setFile] = useState(undefined);
+  const created_By = user.data.user_id;
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append("group_name", group_name);
+      formData.append("created_by", created_By);
+      formData.append("image", file);
+      formData.append("desc", desc);
+
+      formData.append("category_id", category);
+      formData.append("people_limit", peopleLimit);
+
+      for (const [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`);
+      }
+
+      const submit = await http.post("http://localhost:8000/api/groups", formData);
+      console.log("Group Created", submit);
+      navigate(`/`);
+    } catch (error) {
+      console.error("Create Group failed:", error);
+    }
+  };
   return (
     <div className='py-6 px-6 lg:px-8 text-left md:w-[600px] w-[90%] mx-auto flex flex-col'>
       <h3 className='text-gray-800 font-bold text-2xl mb-1'>Create Group</h3>
       <br></br>
-      <form className='spacy-y-6' action='#'>
+      <form className='spacy-y-6' onSubmit={handleSubmit}>
         <div>
           <label htmlFor='group_name' className='block mb-2 text-sm font-medium text-grey-900'>
             Group Name
@@ -28,6 +78,8 @@ function CreateGroupPage() {
               type='text'
               name='group_name'
               id='group_name'
+              value={group_name}
+              onChange={(e) => setGroup_name(e.target.value)}
               className='boder border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5'
               placeholder='HobbyLinks'
               required
@@ -59,6 +111,8 @@ function CreateGroupPage() {
             <select
               id='category_id'
               name='category_id'
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
               className='boder border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5'
             >
               <option value='0'>-- Select --</option>
@@ -99,6 +153,8 @@ function CreateGroupPage() {
               type='number'
               name='people_limit'
               id='people_limit'
+              value={peopleLimit}
+              onChange={(e) => setPeopleLimit(e.target.value)}
               className='boder border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5'
               placeholder='1000'
               min='1'
@@ -128,6 +184,7 @@ function CreateGroupPage() {
               type='file'
               name='header_path'
               id='header_path'
+              onChange={handleFileChange}
               className='boder border-gray-300 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5'
               required
             />
@@ -156,8 +213,11 @@ function CreateGroupPage() {
               type='text'
               name='desc'
               id='desc'
+              value={desc}
+              onChange={(e) => setDesc(e.target.value)}
+              rows='5'
               placeholder='Welcome to our group'
-              className='h-10 boder border-gray-300 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5'
+              className=' boder border-gray-300 text-sm rounded-lg focus:outline-none block w-full p-2.5'
               required
             ></textarea>
           </div>
