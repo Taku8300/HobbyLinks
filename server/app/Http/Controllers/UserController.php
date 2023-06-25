@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Storage;
 
 
 
@@ -28,6 +29,30 @@ class UserController extends Controller
     {
         //
         $user = User::create($request->all());
+
+        if ($request->hasFile('image')) {
+            $rules = [
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // 画像ファイルの制約を指定する
+            ];
+
+            $file = $request->file('image');
+
+            $request->validate($rules);
+
+            $fileName = time() . '_' . $file->getClientOriginalName();
+
+            $disk = 'local';
+
+            $path = $file->storeAs('public/images/profile_pic', $fileName, $disk);
+
+            $publicPath = Storage::url($path);
+
+            $user->profile_Pic = $publicPath;
+
+            $user->save();
+        }
+
+
         return response()->json($user, 201);
     }
 

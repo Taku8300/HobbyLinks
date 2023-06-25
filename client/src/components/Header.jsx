@@ -30,17 +30,14 @@ function Header() {
       : null
   );
 
-  console.log("User", user);
-
   //handle Login
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const csrf = await http.get("/sanctum/csrf-cookie");
-    console.log("csrf :", csrf);
     try {
+      const csrf = await http.get("/sanctum/csrf-cookie");
       const login = await http.post("/api/login", {
         email,
         password,
@@ -67,20 +64,56 @@ function Header() {
   };
 
   //handle register
+  const [file, setFile] = useState(undefined);
   const [name, setName] = useState("");
   const [birthday, setBirthday] = useState("");
   const [gender, setGender] = useState("");
   const [registerMail, setRegisterMail] = useState("");
-  const [image, setImage] = useState(null);
+  const [regisPassword, setRegisPassword] = useState("");
+  //console.log(name, birthday, gender, registerMail, regisPassword, file);
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
 
   const handleRegister = async (e) => {
-    const register = await http.post("/api/users", {
-      name,
-      birthday,
-      gender,
-      registerMail,
-      image,
-    });
+    e.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append("user_name", name);
+      formData.append("birthday", birthday);
+      formData.append("gender", gender);
+      formData.append("email", registerMail);
+      formData.append("password", regisPassword);
+      formData.append("image", file);
+
+      for (const [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`);
+      }
+
+      const register = await http.post("http://localhost:8000/api/users", formData);
+      console.log("Registration successful", register);
+
+      //login after register
+      const login = await http.post("/api/login", {
+        email: registerMail,
+        password: regisPassword,
+      });
+
+      const user = await http.get("/api/user");
+      const current = localStorage.setItem("currentUser", JSON.stringify(user));
+      setUser(user);
+      setShowModal2(false);
+
+      setFile(undefined);
+      setName("");
+      setBirthday("");
+      setGender("");
+      setRegisterMail("");
+      setRegisPassword("");
+    } catch (error) {
+      console.error("Register failed:", error);
+    }
   };
 
   return (
@@ -240,14 +273,14 @@ function Header() {
             </button>
           </form>
         </div>
-
-        {/* Register Form */}
       </Modal>
+
+      {/* Register Form */}
       <Modal isVisible={showModal2} onClose={() => setShowModal2(false)}>
         <div className='py-6 px-6 lg:px-8 text-left'>
           <h3 className='text-gray-800 font-bold text-xl mb-4'>Sign up</h3>
 
-          <form className='spacy-y-6' action='#'>
+          <form className='spacy-y-6' onSubmit={handleRegister}>
             <div>
               <label htmlFor='name' className='block mb-2 text-sm font-medium text-grey-900'>
                 Name
@@ -267,8 +300,10 @@ function Header() {
                 </svg>
                 <input
                   type='text'
-                  name='name'
-                  id='name'
+                  name='user_name'
+                  id='user_name'
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className='boder border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5'
                   placeholder='HobbyLinks'
                   required
@@ -303,6 +338,8 @@ function Header() {
                   type='date'
                   name='birthday'
                   id='birthday'
+                  value={birthday}
+                  onChange={(e) => setBirthday(e.target.value)}
                   className='boder border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5'
                   required
                 />
@@ -333,11 +370,13 @@ function Header() {
                 <select
                   id='gender'
                   name='gender'
+                  value={gender}
+                  onChange={(e) => setGender(e.target.value)}
                   className='boder border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5'
                 >
-                  <option value='0'>Male</option>
-                  <option value='1'>Female</option>
-                  <option value='2'>Orther</option>
+                  <option value='Male'>Male</option>
+                  <option value='Female'>Female</option>
+                  <option value='Other'>Other</option>
                 </select>
               </div>
             </div>
@@ -366,10 +405,10 @@ function Header() {
 
                 <input
                   type='file'
-                  name='header_path'
-                  id='header_path'
+                  name='image'
+                  id='image'
+                  onChange={handleFileChange}
                   className='boder border-gray-300 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5'
-                  required
                 />
               </div>
             </div>
@@ -396,6 +435,8 @@ function Header() {
                   type='email'
                   name='email'
                   id='email'
+                  value={registerMail}
+                  onChange={(e) => setRegisterMail(e.target.value)}
                   className='boder border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5'
                   placeholder='hobbylinks@gmail.com'
                   required
@@ -423,6 +464,8 @@ function Header() {
                   type='password'
                   name='password'
                   id='password'
+                  value={regisPassword}
+                  onChange={(e) => setRegisPassword(e.target.value)}
                   placeholder='******'
                   className='boder border-gray-300 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5'
                   required
