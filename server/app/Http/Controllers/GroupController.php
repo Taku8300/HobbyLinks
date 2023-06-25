@@ -38,7 +38,7 @@ class GroupController extends Controller
         $disk = 'local';
 
         // Save the file to the specified location
-        $path = $file->storeAs('public/images', $fileName, $disk);
+        $path = $file->storeAs('public/images/groupHeader', $fileName, $disk);
 
         // Create a symbolic link
         $publicPath = Storage::url($path);

@@ -11,11 +11,11 @@ function App() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/group/:groupId" element={<GroupPage />} />
-        <Route path="/event/:eventId" element={<EventPage />} />
-        <Route path="/createEvent" element={<CreateEventPage />} />
-        <Route path="/createGroup" element={<CreateGroupPage />} />
+        <Route path='/' element={<MainPage />} />
+        <Route path='/group/:groupId' element={<GroupPage />} />
+        <Route path='/event/:eventId' element={<EventPage />} />
+        <Route path='/createEvent' element={<CreateEventPage />} />
+        <Route path='/createGroup' element={<CreateGroupPage />} />
       </Routes>
     </BrowserRouter>
   );
