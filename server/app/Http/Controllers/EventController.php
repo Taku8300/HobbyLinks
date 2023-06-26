@@ -21,7 +21,7 @@ class EventController extends Controller
         $validatedData = $request->validate([
             'event_name' => 'required',
             'desc' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
             'created_by' => 'required',
             'prefecture' => 'required',
             'address' => 'required',

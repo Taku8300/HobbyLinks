@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 export default function EventHeader({ imgUrl, title }) {
+  const imgPath = `http://localhost:8000${imgUrl}`;
   return (
     <div className="mx-auto">
       <div className="mt-2">
@@ -14,7 +15,7 @@ export default function EventHeader({ imgUrl, title }) {
       </div>
 
       <div className="flex justify-center ">
-        <img src={imgUrl} alt="" className="max-w-4xl h-[400px] w-[896px]" />
+        <img src={imgPath} alt="" className="max-w-4xl h-[400px] w-[896px]" />
       </div>
     </div>
   );

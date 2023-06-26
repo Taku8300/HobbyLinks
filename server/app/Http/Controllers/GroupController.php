@@ -20,9 +20,11 @@ class GroupController extends Controller
         $validatedData = $request->validate([
             'group_name' => 'required',
             'desc' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
             'created_by' => 'required',
             'category_id' => 'required',
+            'people_limit' => 'required',
+
 
         ]);
         $new_group = Group::create([
@@ -30,6 +32,7 @@ class GroupController extends Controller
             'desc' => $validatedData['desc'],
             'category_id' => $validatedData['category_id'],
             'created_by' => $validatedData['created_by'],
+            'people_limit' => $validatedData['people_limit']
         ]);
         $file = $request->file('image');
 
