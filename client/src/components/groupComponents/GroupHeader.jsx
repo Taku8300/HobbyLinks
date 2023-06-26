@@ -6,13 +6,14 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
-function GroupHeader({ imgUrl, title, groupId }) {
+function GroupHeader({ imgUrl, title, groupId, created_by }) {
+  const imgPath = `http://localhost:8000${imgUrl}`;
   return (
     <div className="flex justify-center mx-auto w-full ">
-      <div>
-        <img src="" alt="" className="max-w-2xl h-[400px]" />
+      <div className="pl-6">
+        <img src={imgPath} alt="" className="max-w-2xl h-[400px]" />
       </div>
-      <div className="pl-6  max-w-sm w-full">
+      <div className="pl-10  max-w-sm w-full">
         <h1 className="text-3xl font-bold ">{title}</h1>
 
         <div className="mt-2">
@@ -26,7 +27,7 @@ function GroupHeader({ imgUrl, title, groupId }) {
           </div>
           <div className="flex ">
             <FontAwesomeIcon icon={faUser} />
-            <p className="pl-[14px] font-normal">Created by : User_01</p>
+            <p className="pl-[14px] font-normal">Created by : {created_by}</p>
           </div>
         </div>
       </div>

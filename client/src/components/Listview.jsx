@@ -11,6 +11,7 @@ function Listview({ showList }) {
       try {
         const response = await axios.get("http://localhost:8000/api/events");
         setEvents(response.data);
+        console.log(events);
       } catch (error) {
         console.error("Error fetching events:", error);
       }
@@ -23,6 +24,7 @@ function Listview({ showList }) {
       try {
         const response = await axios.get("http://localhost:8000/api/groups");
         setGroups(response.data);
+        console.log(groups);
       } catch (error) {
         console.error("Error fetching groups:", error);
       }
@@ -45,6 +47,8 @@ function eventlist({ events }) {
       desc={e.desc}
       title={e.event_name}
       eventId={e.event_id}
+      imgUrl={e.header_path}
+      date={e.date}
     />
   ));
 }
@@ -56,6 +60,7 @@ function grouplist({ groups }) {
       desc={e.desc}
       title={e.group_name}
       groupId={e.group_id}
+      imgUrl={e.header_path}
     />
   ));
 }
