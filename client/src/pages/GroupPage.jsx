@@ -20,13 +20,15 @@ function GroupPage() {
     events: [],
   });
 
+  const [user, setuser] = useState("");
+
   useEffect(() => {
     const fetchGroupData = async () => {
       try {
         const response = await axios.get(
           `http://localhost:8000/api/groups/${groupId}`
         );
-        console.log(response);
+
         setGroupDetails({
           title: response.data.group_name,
           desc: response.data.desc,
@@ -35,14 +37,28 @@ function GroupPage() {
           imgUrl: response.data.header_path,
           created_by: response.data.created_by,
         });
-        console.log(groupDetails);
       } catch (error) {
         console.error("Error fetching group details:", error);
       }
     };
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/api/users/${groupDetails.created_by}`
+        );
+        console.log("userRes", response);
+        setuser(response.data.user_name);
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    };
 
     fetchGroupData();
-  }, [groupId]);
+    if (groupDetails.created_by) {
+      fetchUser();
+    }
+  }, [groupId, groupDetails.created_by]);
+
   return (
     <>
       <div className="min-h-screen bg-slate-50">
@@ -52,6 +68,7 @@ function GroupPage() {
             groupId={groupId}
             imgUrl={groupDetails.imgUrl}
             title={groupDetails.title}
+            user={user}
           />
 
           <div className="flex mt-10 ">
