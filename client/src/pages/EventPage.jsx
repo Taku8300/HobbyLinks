@@ -14,8 +14,11 @@ function EventPage() {
     type: "",
     date: "",
     prefecture: "",
+    created_by: "",
     eventId: eventId,
   });
+
+  const [user, setUser] = useState("");
 
   useEffect(() => {
     const fetchEventsData = async () => {
@@ -32,6 +35,7 @@ function EventPage() {
           address: response.data.address,
           type: response.data.type,
           prefecture: response.data.prefecture,
+          created_by: response.data.created_by,
           date: response.data.date,
         });
         console.log(eventDetails);
@@ -40,8 +44,23 @@ function EventPage() {
       }
     };
 
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/api/users/${eventDetails.created_by}`
+        );
+        console.log("userRes", response);
+        setUser(response.data.user_name);
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    };
+
     fetchEventsData();
-  }, [eventId]);
+    if (eventDetails.created_by) {
+      fetchUser();
+    }
+  }, [eventId, eventDetails.created_by]);
 
   return (
     <>
@@ -50,6 +69,7 @@ function EventPage() {
           <EventHeader
             imgUrl={eventDetails.imgUrl}
             title={eventDetails.title}
+            user={user}
           />
           <EventDesc
             desc={eventDetails.desc}
