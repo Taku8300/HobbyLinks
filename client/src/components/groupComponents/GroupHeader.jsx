@@ -11,7 +11,7 @@ function GroupHeader({ imgUrl, title, groupId, user }) {
   return (
     <div className="flex justify-center mx-auto w-full ">
       <div className="pl-6">
-        <img src={imgPath} alt="" className="max-w-2xl h-[400px]" />
+        <img src={imgPath} alt="" className="max-w-3xl h-[400px]" />
       </div>
       <div className="pl-10  max-w-sm w-full">
         <h1 className="text-3xl font-bold ">{title}</h1>

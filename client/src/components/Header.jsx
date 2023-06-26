@@ -160,6 +160,9 @@ function Header() {
           {user != null ? (
             <>
               <div className="flex gap-1">
+                <p className="text-gray-700 font-bold mr-2  text-center pt-2">
+                  Welcome,{user.data.user_name}
+                </p>
                 <Link
                   to="/createGroup"
                   className="border hover:border-b-purple-500 border-b-4 font-medium rounded-lg px-4 py-2 text-center"
@@ -173,9 +176,6 @@ function Header() {
                 >
                   Create Event
                 </Link>
-                <p className="text-gray-700 font-bold mr-2  text-center pt-2">
-                  Welcome,{user.data.user_name}
-                </p>
 
                 <button
                   className=" border hover:border-purple-500  border-b-4 border-r-4 font-medium rounded-lg  px-4 py-2 
