@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\E_manageController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\G_manageController;
 use App\Http\Controllers\GroupController;
@@ -52,6 +53,11 @@ Route::delete('/events/{id}', [EventController::class, 'destroy']);
 Route::get('/groups/{id}/users', [G_manageController::class, 'queryUserInGroup']);
 Route::post('/groups/{id}/users', [G_manageController::class, 'addUserToGroup']);
 Route::delete('/groups/{id}/users', [G_manageController::class, 'removeUserFromGroup']);
+
+//Emange route
+Route::get('/events/{id}/users', [E_manageController::class, 'queryUserInEvent']);
+Route::post('/events/{id}/users', [E_manageController::class, 'addUserToEvent']);
+Route::delete('/events/{id}/users', [E_manageController::class, 'removeUserFromEvent']);
 
 //photos
 Route::post('/photos', [PhotoController::class, 'upload']);

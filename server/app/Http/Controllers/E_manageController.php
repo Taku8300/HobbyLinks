@@ -17,7 +17,7 @@ class E_manageController extends Controller
         ]);
 
         $emanage =  EManage::create($validatedData);
-        return response()->json(['message' => 'User added to group successfully', 'emanage' => $emanage], 200);
+        return response()->json(['message' => 'User added to event successfully', 'emanage' => $emanage], 200);
     }
 
     public function removeUserFromEvent(Request $request)
@@ -29,7 +29,7 @@ class E_manageController extends Controller
         ]);
 
         EManage::where($validatedData)->delete();
-        return response()->json('User removed from group successfully', 200);
+        return response()->json('User removed from event successfully', 200);
     }
 
     public function queryUserInEvent($eventId)
