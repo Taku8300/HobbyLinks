@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\EManage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,6 +24,7 @@ class EventController extends Controller
             'desc' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
             'created_by' => 'required',
+            'group_id' => 'required',
             'prefecture' => 'required',
             'address' => 'required',
             'type' => 'required',
@@ -35,11 +37,10 @@ class EventController extends Controller
             'desc' => $validatedData['desc'],
             'type' => $validatedData['type'],
             'created_by' => $validatedData['created_by'],
+            'group_id' => $validatedData['group_id'],
             'prefecture' => $validatedData['prefecture'],
             'address' => $validatedData['address'],
             'date' => $validatedData['date'],
-
-
         ]);
         $file = $request->file('image');
 
@@ -56,7 +57,13 @@ class EventController extends Controller
         $new_event->header_path = $publicPath;
         $new_event->save();
 
-        return response()->json($new_event, 201);
+        $emanage = EManage::create([
+            'event_id' => $new_event->event_id,
+            'user_id' => $new_event->created_by,
+            'group_id' => $new_event->group_id
+
+        ]);
+        return response()->json(['new_event' => $new_event, 'emanage' =>  $emanage], 201);
     }
 
     public function show(string $id)

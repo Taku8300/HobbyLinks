@@ -11,7 +11,6 @@ function Listview({ showList }) {
       try {
         const response = await axios.get("http://localhost:8000/api/events");
         setEvents(response.data);
-        console.log(events);
       } catch (error) {
         console.error("Error fetching events:", error);
       }
@@ -24,7 +23,6 @@ function Listview({ showList }) {
       try {
         const response = await axios.get("http://localhost:8000/api/groups");
         setGroups(response.data);
-        console.log(groups);
       } catch (error) {
         console.error("Error fetching groups:", error);
       }
@@ -34,7 +32,7 @@ function Listview({ showList }) {
   }, []);
 
   return (
-    <div className=" max-w-7xl  mx-auto overflow-y-auto">
+    <div className=' max-w-7xl  mx-auto overflow-y-auto'>
       {showList === "event" ? eventlist({ events }) : grouplist({ groups })}
     </div>
   );

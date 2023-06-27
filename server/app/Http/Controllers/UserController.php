@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Storage;
-
+use App\Models\Group;
 
 
 class UserController extends Controller
@@ -121,5 +121,11 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return response()->noContent();
+    }
+
+    public function queryUsercreatedGroups(string $user_id)
+    {
+        $groups = Group::where('created_by', $user_id)->get();
+        return response()->json($groups, 200);
     }
 }
