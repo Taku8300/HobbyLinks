@@ -64,9 +64,9 @@ class GroupController extends Controller
     public function show(string $id)
     {
         $group = Group::find($id);
-        $user = User::find($group->created_by);
-        $userName = $user->user_name;
-        return response()->json(["group" => $group, "created_by" => $userName], 200);
+        // $user = User::find($group->created_by);
+        // $userName = $user->user_name;
+        return response()->json($group, 200);
     }
 
     public function update(Request $request, string $id)
