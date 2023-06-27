@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('e_manages', function (Blueprint $table) {
             $table->integer('event_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->integer('group_id')->unsigned();
+
             $table->timestamps();
             $table->softDeletes();
 
@@ -22,6 +24,7 @@ return new class extends Migration
 
             $table->foreign('event_id')->references('event_id')->on('events');
             $table->foreign('user_id')->references('user_id')->on('users');
+            $table->foreign('group_id')->references('group_id')->on('groups');
         });
     }
 
@@ -33,6 +36,7 @@ return new class extends Migration
         Schema::table('e_manages', function (Blueprint $table) {
             $table->dropForeign(['event_id']);
             $table->dropForeign(['user_id']);
+            $table->dropForeign(['group_id']);
         });
 
         Schema::dropIfExists('e_manages');

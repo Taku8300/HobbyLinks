@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\G_manageController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\PhotoController;
 use Illuminate\Http\Request;
@@ -47,6 +48,10 @@ Route::post('/events', [EventController::class, 'store']);
 Route::put('/events/{id}', [EventController::class, 'update']);
 Route::delete('/events/{id}', [EventController::class, 'destroy']);
 
+//Gmanage route
+Route::get('/groups/{id}/users', [G_manageController::class, 'queryUserInGroup']);
+Route::post('/groups/{id}/users', [G_manageController::class, 'addUserToGroup']);
+Route::delete('/groups/{id}/users', [G_manageController::class, 'removeUserFromGroup']);
 
 //photos
 Route::post('/photos', [PhotoController::class, 'upload']);

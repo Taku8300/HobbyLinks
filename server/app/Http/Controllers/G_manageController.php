@@ -11,8 +11,8 @@ class G_manageController extends Controller
     public function addUserToGroup(Request $request)
     {
         $validatedData = $request->validate([
-            'group_id' => 'required|exists:groups,id',
-            'user_id' => 'required|exists:users,id'
+            'group_id' => 'required|exists:groups,group_id',
+            'user_id' => 'required|exists:users,user_id'
         ]);
 
         $gmanage =  GManage::create($validatedData);
@@ -22,17 +22,17 @@ class G_manageController extends Controller
     public function removeUserFromGroup(Request $request)
     {
         $validatedData = $request->validate([
-            'group_id' => 'required|exists:groups,id',
-            'user_id' => 'required|exists:users,id'
+            'group_id' => 'required|exists:g_manages,group_id',
+            'user_id' => 'required|exists:g_manages,user_id'
         ]);
 
         GManage::where($validatedData)->delete();
-        return response()->json(['message' => 'User removed from group successfully'], 200);
+        return response()->json('User removed from group successfully', 200);
     }
 
     public function queryUserInGroup($groupId)
     {
-        $users = GManage::where('group_id', $groupId)->with('user')->get();
+        $users = GManage::where('group_id', $groupId)->get();
 
         return response()->json($users, 200);
     }
