@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Group;
 use App\Models\GManage;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -63,7 +64,9 @@ class GroupController extends Controller
     public function show(string $id)
     {
         $group = Group::find($id);
-        return response()->json($group, 200);
+        $user = User::find($group->created_by);
+        $userName = $user->user_name;
+        return response()->json(["group" => $group, "created_by" => $userName], 200);
     }
 
     public function update(Request $request, string $id)
@@ -78,11 +81,5 @@ class GroupController extends Controller
         $group = Group::find($id);
         $group->delete();
         return response()->json(null, 204);
-    }
-
-    public function queryUsercreatedGroups(string $user_id)
-    {
-        $groups = Group::where('created_by', $user_id)->get();
-        return response()->json($groups, 200);
     }
 }

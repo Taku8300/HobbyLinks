@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\EManage;
+use App\Models\User;
 
 class E_manageController extends Controller
 {
@@ -35,7 +36,9 @@ class E_manageController extends Controller
     public function queryUserInEvent($eventId)
     {
         $users = EManage::where('event_id', $eventId)->get();
+        $userIds = $users->pluck('user_id')->toArray(); // Extract user IDs from the result
+        $usersData = User::whereIn('user_id', $userIds)->get(); // Retrieve users from the 'users' table
 
-        return response()->json($users, 200);
+        return response()->json($usersData, 200);
     }
 }

@@ -87,6 +87,7 @@ function CreateGroupPage() {
             />
           </div>
         </div>
+
         <div>
           <label htmlFor='category_id' className='block mb-2 text-sm font-medium text-grey-900'>
             Category

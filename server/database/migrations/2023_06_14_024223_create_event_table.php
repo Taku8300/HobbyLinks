@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->increments('event_id');
             $table->string('event_name', 250);
-            $table->string('prefecture', 5);
+            $table->string('prefecture', 100);
             $table->string('address', 100);
             $table->integer('created_by')->unsigned(); //userID参照
             $table->integer('group_id')->unsigned(); //groupID参照
             $table->string('type');
             $table->string('header_path', 350)->default(""); //画像
-            $table->string('desc');
+            $table->string('desc', 350);
             $table->date('date');
             $table->timestamps();
             $table->softDeletes();
