@@ -17,7 +17,6 @@ return new class extends Migration
             $table->integer('group_id')->unsigned();
 
             $table->timestamps();
-            $table->softDeletes();
 
             // 複合主キーじゃないと元テーブルとの整合性がとれなくなる
             $table->primary(['event_id', 'user_id']);

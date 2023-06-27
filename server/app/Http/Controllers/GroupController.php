@@ -21,6 +21,7 @@ class GroupController extends Controller
         $validatedData = $request->validate([
             'group_name' => 'required',
             'desc' => 'required',
+            'prefecture' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
             'created_by' => 'required',
             'category_id' => 'required',
@@ -31,6 +32,7 @@ class GroupController extends Controller
             'desc' => $validatedData['desc'],
             'category_id' => $validatedData['category_id'],
             'created_by' => $validatedData['created_by'],
+            'prefecture' => $validatedData['prefecture'],
             'people_limit' => $validatedData['people_limit']
         ]);
 
@@ -76,5 +78,11 @@ class GroupController extends Controller
         $group = Group::find($id);
         $group->delete();
         return response()->json(null, 204);
+    }
+
+    public function queryUsercreatedGroups(string $user_id)
+    {
+        $groups = Group::where('created_by', $user_id)->get();
+        return response()->json($groups, 200);
     }
 }

@@ -30,6 +30,8 @@ Route::get('/users/{id}', [UserController::class, 'show']);
 Route::post('/users', [UserController::class, 'store']);
 Route::put('/users/{id}', [UserController::class, 'update']);
 Route::delete('/users/{id}', [UserController::class, 'destroy']);
+Route::get('/user/{id}/created_groups', [GroupController::class, 'queryUsercreatedGroups']); //query user created groups
+
 
 //Auth Routes
 Route::post('/login', [UserController::class, 'login']);
@@ -41,6 +43,7 @@ Route::get('/groups/{id}', [GroupController::class, 'show']);
 Route::post('/groups', [GroupController::class, 'store']);
 Route::put('/groups/{id}', [GroupController::class, 'update']);
 Route::delete('/groups/{id}', [GroupController::class, 'destroy']);
+
 
 //Events Routes
 Route::get('/events', [EventController::class, 'index']);

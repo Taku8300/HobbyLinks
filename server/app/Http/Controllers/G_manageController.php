@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\GManage;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class G_manageController extends Controller
 {
@@ -32,8 +34,16 @@ class G_manageController extends Controller
 
     public function queryUserInGroup($groupId)
     {
+        //SELECT * FROM users WHERE id IN ( SELECT user_id FROM gmanages WHERE group_id = $groupId);
         $users = GManage::where('group_id', $groupId)->get();
+        $userIds = $users->pluck('user_id')->toArray(); // Extract user IDs from the result
+        $usersData = User::whereIn('user_id', $userIds)->get(); // Retrieve users from the 'users' table
 
-        return response()->json($users, 200);
+        // $usersData = DB::select("
+        // SELECT * FROM users WHERE user_id IN (
+        //     SELECT user_id FROM g_manages WHERE group_id = ?
+        // )", [$groupId]);
+
+        return response()->json($usersData, 200);
     }
 }
