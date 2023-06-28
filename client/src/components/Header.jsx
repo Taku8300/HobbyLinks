@@ -132,8 +132,10 @@ function Header() {
     <Fragment>
       <div className="flex justify-between gap-5 align-top mx-auto sticky top-0 z-20 max-w-[2560px] px-10 py-2 bg-white shadow-md">
         <div className="flex gap-5">
-          <Link to={`/`} className="font-bold text-2xl cursor-pointer ">
-            HobbyLinks
+          <Link to={`/`} className="font-bold text-2xl cursor-pointer bg-purple-500 text-white rounded px-5 items-center">
+            <div className="">
+              HobbyLinks
+            </div>
           </Link>
           <div>
             <input
