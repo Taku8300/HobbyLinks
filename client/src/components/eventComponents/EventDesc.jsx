@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-regular-svg-icons";
 import {
@@ -7,26 +7,35 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function EventDesc({ desc, date, type, address, prefecture }) {
+  //handle Join event ptn
+  const [joined, setJoined] = useState(false);
+  const handleJoinEventBtn = () => {};
   return (
-    <div className="mx-auto mt-10">
-      <div className="flex mb-2 align-middle gap-2">
-        <FontAwesomeIcon icon={faCalendar} size="xl" />
-        <h1 className=" text-xl">{date}</h1>
-      </div>
+    <div className="mx-auto mt-10 max-w-4xl w-full">
+      <div className="flex">
+        <div className="flex mb-2 align-middle gap-2">
+          <FontAwesomeIcon icon={faCalendar} size="xl" />
+          <h1 className=" text-xl">{date}</h1>
+          <br />
+          <FontAwesomeIcon icon={faMapLocationDot} size="xl" />
+          <h2 className="text-xl">{address}</h2>
+        </div>
 
-      <div className="flex mb-4 align-middle gap-2">
-        <FontAwesomeIcon icon={faMapLocationDot} size="xl" />
-        <h2 className="text-xl">{address}</h2>
+        <button
+          className={` font-bold text-xl px-5 py-2.5 text-center m-2 ml-10 ${
+            joined
+              ? "text-white bg-red-500 hover:bg-red-800 hover:border-red-600 border-red-400 border-b-4 rounded-lg"
+              : "text-white bg-purple-500 hover:bg-purple-800 hover:border-purple-600 border-purple-400 border-b-4 rounded-lg"
+          }`}
+          onClick={handleJoinEventBtn}
+        >
+          {joined ? "Leave This Event" : "Join This Group"}
+        </button>
       </div>
 
       <div className="mt-5 max-w-4xl">
         <h1 className="text-3xl font-bold mb-2">Descriptions</h1>
-        <p className="font-normal mb-2">
-          {desc} Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          Doloremque odit animi voluptates nulla ullam nemo tempore eius, quod
-          temporibus labore iusto, aperiam blanditiis aut consequuntur hic
-          fugiat dolore iure veritatis.
-        </p>
+        <p className="font-normal mb-2">{desc}</p>
       </div>
 
       <div className=" ">

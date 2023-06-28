@@ -18,7 +18,9 @@ class G_manageController extends Controller
         ]);
 
         $gmanage =  GManage::create($validatedData);
-        return response()->json(['message' => 'User added to group successfully', 'gmanage' => $gmanage], 200);
+        $userIds = $gmanage->user_id;
+        $usersData = User::find($userIds); // Retrieve users from the 'users' table
+        return response()->json(['message' => 'User added to group successfully', 'gmanage' => $gmanage, 'usersData' => $usersData], 200);
     }
 
     public function removeUserFromGroup(Request $request)
