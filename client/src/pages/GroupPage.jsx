@@ -94,6 +94,7 @@ function GroupPage() {
       console.error(error);
     }
   };
+
   useEffect(() => {
     currentUserInGroup();
   }, []);

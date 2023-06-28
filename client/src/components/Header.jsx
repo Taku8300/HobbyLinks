@@ -131,9 +131,11 @@ function Header() {
   return (
     <Fragment>
       <div className="flex justify-between gap-5 align-top mx-auto sticky top-0 z-20 max-w-[2560px] px-10 py-2 bg-white shadow-md">
-        <div className="flex gap-5">
-          <Link to={`/`} className="font-bold text-2xl cursor-pointer ">
-            HobbyLinks
+        <div className="flex gap-4">
+          <Link to={`/`} className="">
+            <div className="font-black text-2xl cursor-pointer bg-purple-500 text-white rounded px-4 py-1 ">
+              HOBBYLINKS
+            </div>
           </Link>
           <div>
             <input
@@ -165,21 +167,21 @@ function Header() {
                 </p>
                 <Link
                   to="/createGroup"
-                  className="border hover:border-b-purple-500 border-b-4 font-medium rounded-lg px-4 py-2 text-center"
+                  className="border hover:border-b-purple-500 border-b-4 font-medium rounded-lg px-4 py-2 text-center h-10 "
                 >
                   Create Group
                 </Link>
 
                 <Link
                   to="/createEvent"
-                  className="border hover:border-b-purple-500 border-b-4 font-medium rounded-lg px-4 py-2 text-center"
+                  className="border hover:border-b-purple-500 border-b-4 font-medium rounded-lg px-4 py-2 text-center h-10"
                 >
                   Create Event
                 </Link>
 
                 <button
                   className=" border hover:border-purple-500  border-b-4 border-r-4 font-medium rounded-lg  px-4 py-2 
-                  text-center "
+                  text-center h-10 "
                   onClick={handleLogout}
                 >
                   Logout
