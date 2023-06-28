@@ -111,6 +111,7 @@ function GroupPage() {
   const handleJoinDelete = async () => {
     try {
       if (joined == true) {
+        setLoading(true);
         // Send DELETE request to leave the group
         let formData = new FormData();
         formData.append("_method", "DELETE");
@@ -129,12 +130,15 @@ function GroupPage() {
       }
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleJoinPost = async () => {
     try {
       if (joined == false) {
+        setLoading(true);
         let formData = new FormData();
         formData.append("group_id", groupId);
         formData.append("user_id", currentUser.data.user_id);
@@ -148,6 +152,8 @@ function GroupPage() {
       }
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -168,6 +174,8 @@ function GroupPage() {
 
     fetchMembers();
   }, [groupId]);
+
+  const [loading, setLoading] = useState(false);
 
   return (
     <>
@@ -225,8 +233,13 @@ function GroupPage() {
                     : "text-white bg-purple-500 hover:bg-purple-800 hover:border-purple-600 border-purple-400 border-b-4 rounded-lg"
                 }`}
                 onClick={handleJoinGroupBtn}
+                disabled={loading} // Disable button while loading
               >
-                {joined ? "Leave This Group" : "Join This Group"}
+                {loading
+                  ? "Loading..."
+                  : joined
+                  ? "Leave This Group"
+                  : "Join This Group"}
               </button>
             </div>
           </div>
