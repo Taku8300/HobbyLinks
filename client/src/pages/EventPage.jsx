@@ -8,14 +8,6 @@ import axios from "axios";
 function EventPage() {
   const { eventId } = useParams();
 
-  const http = axios.create({
-    baseURL: "http://localhost:8000",
-    headers: {
-      "X-Requested-with": "XMLHttpRequest",
-    },
-    withCredentials: true,
-  });
-
   const [eventDetails, setEventDetails] = useState({
     imgUrl: "",
     title: "",
@@ -37,9 +29,7 @@ function EventPage() {
   useEffect(() => {
     const fetchEventsData = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8000/api/events/${eventId}`
-        );
+        const response = await axios.get(`http://localhost:8000/api/events/${eventId}`);
 
         setEventDetails({
           title: response.data.event_name,
@@ -76,91 +66,13 @@ function EventPage() {
     }
   }, [eventId, eventDetails.created_by]);
 
-  //handle Join state
-  const [joined, setJoined] = useState(false);
-  //check if current user is in group if true setJoined to true
-  const currentUserInGroup = async () => {
-    try {
-      const res = await http.get(
-        `http://localhost:8000/api/events/${eventId}/users`
-      );
-      const attendees = res.data;
-
-      const currentUserExists = attendees.some(
-        (attendee) => attendee.user_id === currentUser.data.user_id
-      );
-      console.log("Is current user in Event?", currentUserExists);
-      setJoined(currentUserExists);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    currentUserInGroup();
-  }, []);
-
-  const handleJoinDelete = async () => {
-    try {
-      if (joined == true) {
-        setLoading(true);
-        // Send DELETE request to leave the group
-        let formData = new FormData();
-        formData.append("_method", "DELETE");
-        formData.append("event_id", eventId);
-        formData.append("group_id", eventDetails.group_id);
-        formData.append("user_id", currentUser.data.user_id);
-        const res = await http.post(
-          `http://localhost:8000/api/events/${eventId}/users`,
-          formData
-        );
-        console.log("Remove User from event", res);
-        setMembers((prevMembers) =>
-          prevMembers.filter(
-            (member) => member.user_id !== currentUser.data.user_id
-          )
-        );
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleJoinPost = async () => {
-    try {
-      if (joined == false) {
-        setLoading(true);
-        let formData = new FormData();
-        formData.append("group_id", groupId);
-        formData.append("user_id", currentUser.data.user_id);
-        formData.append("group_id", eventDetails.group_id);
-        const res = await http.post(
-          `http://localhost:8000/api/events/${eventId}/users`,
-          formData
-        );
-        console.log("Add User to event", res);
-        const newMember = res.data.usersData;
-        setMembers((prevMembers) => [...prevMembers, newMember]);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   //fetch attendees
   const [attendees, setAttendees] = useState([]);
-  const attendeesCount = attendees.length;
 
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8000/api/events/${eventId}/users`
-        );
+        const response = await axios.get(`http://localhost:8000/api/events/${eventId}/users`);
         setAttendees(response.data);
       } catch (error) {
         console.error("Error fetching attendees:", error);
@@ -172,13 +84,18 @@ function EventPage() {
 
   return (
     <>
-      <div className=" min-h-screen bg-slate-50">
-        <div className="flex flex-col mb-2 mx-auto max-w-6xl w-full bg-white  py-5 shadow-lg min-h-screen">
+      <div className=' min-h-screen bg-slate-50'>
+        <div className='flex flex-col mb-2 mx-auto max-w-6xl w-full bg-white  py-5 shadow-lg min-h-screen'>
           <EventHeader
             imgUrl={eventDetails.imgUrl}
             title={eventDetails.title}
             group_name={eventDetails.group_name}
+            group_id={eventDetails.group_id}
+            currentUser={currentUser}
+            eventId={eventId}
             user={user}
+            attendees={attendees}
+            setAttendees={setAttendees}
           />
 
           <EventDesc
@@ -190,7 +107,7 @@ function EventPage() {
             date={eventDetails.date}
           />
 
-          <AttendeesSection eventId={eventId} attendees={attendees} />
+          <AttendeesSection eventId={eventId} attendees={attendees} currentUser={currentUser} />
         </div>
       </div>
     </>
