@@ -13,8 +13,10 @@ function GroupItem({ imgUrl, title, desc, groupId }) {
       <div className="flex flex-col justify-start pt-2 px-4">
         <h5 className="mb-1 text-xl font-medium text-neutral-800 ">{title}</h5>
         <h2 className="text-md font-semibold text-amber-500">Osaka, Japan</h2>
-        <p className="text-md text-neutral-600">{desc}</p>
-        <p className="mb-2 text-sm text-neutral-400 text-right">20 Members</p>
+        <p className="text-md text-neutral-600 overflow-hidden overflow-ellipsis">
+          {desc}
+        </p>
+        <p className=" text-sm text-neutral-400 text-left">20 Members</p>
       </div>
     </Link>
   );

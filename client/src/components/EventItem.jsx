@@ -13,7 +13,17 @@ function EventItem({ imgUrl, title, desc, eventId, date }) {
         <h2 className="text-md font-semibold text-amber-500">{date}</h2>
         <h5 className="mb-1 text-xl font-medium text-neutral-800 ">{title}</h5>
         <p className="text-base text-neutral-600">{desc}</p>
-        <p className="mb-2 text-sm text-neutral-400 text-right">20 Attendees</p>
+
+        <p className="text-md text-neutral-400 font-semibold text-left">
+          eggnam
+        </p>
+
+        <div className="flex gap-2">
+          <p className="mb-2 text-sm text-neutral-400 text-left">
+            20 Attendees
+          </p>
+          <p className="mb-2 text-sm text-neutral-400 text-left">Online</p>
+        </div>
       </div>
     </Link>
   );

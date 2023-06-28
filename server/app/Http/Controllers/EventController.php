@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\EManage;
+use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -69,6 +70,9 @@ class EventController extends Controller
     public function show(string $id)
     {
         $events = Event::find($id);
+        $group = Group::find($events->group_id);
+        $groupName = $group->group_name;
+        $events->group_name = $groupName;
         return response()->json($events, 200);
     }
 
