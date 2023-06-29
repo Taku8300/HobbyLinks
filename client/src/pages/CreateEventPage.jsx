@@ -373,7 +373,8 @@ function CreateEventPage() {
               value={desc}
               onChange={(e) => setDesc(e.target.value)}
               placeholder="Welcome to our event"
-              className="h-10 boder border-gray-300 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
+              rows="5"
+              className=" boder border-gray-300 text-sm rounded-lg focus:outline-none  block w-full p-2.5"
               required
             ></textarea>
           </div>
