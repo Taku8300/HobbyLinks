@@ -6,7 +6,7 @@ function EventItem({ imgUrl, title, desc, eventId, date }) {
   return (
     <Link
       to={`/event/${eventId}`}
-      className="flex flex-col rounded-lg bg-white shadow-md  md:flex-row border-b-2 mb-1 cursor-pointer p-1 h-36"
+      className="flex flex-col rounded-lg bg-white shadow-md  md:flex-row border-b-2 mb-1 cursor-pointer p-1 h-44"
     >
       <img src={imgPath} alt="" className="w-52 rounded-md" />
       <div className="flex flex-col justify-start pt-2 px-4">
